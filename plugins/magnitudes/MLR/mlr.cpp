@@ -5,7 +5,7 @@
  * Email: jabe@gempa.de
  *
  * Modifications 2010 - 2011 by Stefan Heimers <heimers@sed.ethz.ch>
- * Modifications 2014 - 2015 by  JeromeSalichon 
+ * Modifications 2014 - 2015 by  JeromeSalichon
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
@@ -27,7 +27,6 @@
 
 #include <iostream>
 
-#include <boost/bind.hpp>
 #include <unistd.h>
 
 // Only valid within 0-20 degrees
@@ -48,7 +47,7 @@ using namespace Seiscomp::Processing;
 
 ADD_SC_PLUGIN(
 	"MLr GNS magnitude, J. Ristau method",
-	"Derived from MLh magnitude & Sc3 Tutorial methods, J.Salichon, GNS Science New Zealand, J.Becker, Gempa", 
+	"Derived from MLh magnitude & Sc3 Tutorial methods, J.Salichon, GNS Science New Zealand, J.Becker, Gempa",
 	0, 0, 1
 )
 
@@ -80,10 +79,12 @@ class Magnitude_MLR : public Processing::MagnitudeProcessor {
 			return "MLv" ;
 		}
 
+		void setDefaults() override {}
+
 		// Do not need to compute another amplitude.
 
 		bool setup(const Settings &settings) {
-			// Reset the configuration 
+			// Reset the configuration
 			list_of_parametersets.clear();
 			try {
 				// Read the settings variable magnitudes.MLr.params. This can be found in the applications
@@ -250,7 +251,7 @@ class Magnitude_MLR : public Processing::MagnitudeProcessor {
 
 				// magTemp = log10(amplitude) - LogAmpREF + StatCorr ;
 				// A is  defined as STATION dependent ie. module.trunk.NZ.WEL.magnitudes.MLr.params ;
-				// Not corrected stations: Default is 0. Use nomag option to disable; 
+				// Not corrected stations: Default is 0. Use nomag option to disable;
 				magTemp = log10(amplitude) - LogAmpREF + selected_parameterset.A ;
 				*mag = magTemp ;
 

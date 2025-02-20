@@ -14,8 +14,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  ***************************************************************************/
 
-#ifndef __MLR_PLUGIN_H__
-#define __MLR_PLUGIN_H__
+#ifndef MLR_PLUGIN_H
+#define MLR_PLUGIN_H
 
 
 #include <seiscomp/core/plugin.h>
